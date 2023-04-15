@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "minoru-fe017": {
+      "hosting": {
+        "MinoruWeb": [
+          "minoru-estacionamento-fatec"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "minoru-fe017"
+  }
+}
