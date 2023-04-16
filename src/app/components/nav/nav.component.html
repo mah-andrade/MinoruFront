@@ -1,1 +1,47 @@
-<p>nav works!</p>
+<mat-toolbar>
+  <button
+    mat-icon-button
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+    <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+  </button>
+  MINORU ESTACIONAMENTO
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <img src="assets/img/logo-minoruAtu.png" />
+    <mat-divider></mat-divider>
+    <mat-nav-list class="nav-list">
+      <a mat-list-item routerLink="home">
+        <i class="material-icons">home</i>
+        Home
+      </a>
+      <a mat-list-item routerLink="garagem">
+        <i class="material-icons">garage</i>
+        Garagem
+      </a>
+      <a mat-list-item routerLink="mensalistas">
+        <i class="material-icons">group</i>
+        Mensalistas
+      </a>
+      <a mat-list-item routerLink="sobre">
+        <i class="material-icons">info</i>
+        Sobre
+      </a>
+      <a mat-list-item routerLink="">
+        <i class="material-icons">help</i>
+        Ajuda
+      </a>
+      <a mat-list-item type="button">
+        <i class="material-icons">logout</i>
+        Sair
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z4">Main content</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

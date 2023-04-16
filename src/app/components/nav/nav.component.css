@@ -1,0 +1,49 @@
+mat-toolbar {
+  background: #004a9f;
+  color: white;
+
+  /*centralizar o logo e o botao  
+   justify-content: center;
+  align-items: center;
+  */
+}
+
+/* precisa centralizar o botao na parte da esquerda nao sei*/
+
+/*ESTILIZAR A CIMA A PARTE DE CIMA DO PROJETO*/
+
+mat-sidenav {
+  margin: 16px;
+  width: 200px;
+  border-right: none;
+  background: #002b5c;
+  color: white;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+mat-sidenav a {
+  color: white;
+}
+mat-sidenav img {
+  width: 100%;
+  padding-top: 1rem;
+}
+.content {
+  height: calc(100vh - 98px);
+  margin: 16px;
+  margin-left: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  color: lightgray;
+
+  border-radius: 10px;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 65px);
+}

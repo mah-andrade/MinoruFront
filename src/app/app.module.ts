@@ -35,9 +35,13 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { HomeComponent } from './components/home/home.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NavComponent } from './components/nav/nav.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { GaragemComponent } from './components/garagem/garagem.component';
+import { MensalistasComponent } from './components/mensalistas/mensalistas.component';
+import { SobreComponent } from './components/sobre/sobre.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, NavComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, NavComponent, MenuComponent, GaragemComponent, MensalistasComponent, SobreComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
