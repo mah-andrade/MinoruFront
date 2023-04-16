@@ -15,7 +15,7 @@ export class NavComponent implements OnInit {
   constructor(
     private router: Router,
     private observer: BreakpointObserver,
-    public authService: AuthService
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -32,5 +32,16 @@ export class NavComponent implements OnInit {
         this.sidenav.open();
       }
     });
+  }
+
+  logout() {
+    this.auth.logout().subscribe(
+      () => {
+        this.router.navigate(['']);
+      },
+      (err) => {
+        alert('Erro ao sair!');
+      }
+    );
   }
 }
