@@ -41,6 +41,7 @@ import { GaragemComponent } from './components/garagem/garagem.component';
 import { MensalistasComponent } from './components/mensalistas/mensalistas.component';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { AdicionarveiculoComponent } from './components/garagem/adicionarveiculo/adicionarveiculo.component';
+import { DialogAdicionarComponent } from './components/garagem/dialog-adicionar/dialog-adicionar.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { AdicionarveiculoComponent } from './components/garagem/adicionarveiculo
     MensalistasComponent,
     SobreComponent,
     AdicionarveiculoComponent,
+    DialogAdicionarComponent,
   ],
   imports: [
     BrowserModule,
