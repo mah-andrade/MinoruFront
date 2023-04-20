@@ -11,7 +11,6 @@ import {
   redirectUnauthorizedTo,
   redirectLoggedInTo,
 } from '@angular/fire/auth-guard';
-import { AdicionarveiculoComponent } from './components/garagem/adicionarveiculo/adicionarveiculo.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -35,12 +34,6 @@ const routes: Routes = [
       {
         path: 'garagem',
         component: GaragemComponent,
-        children: [
-          {
-            path: 'adicionar',
-            component: AdicionarveiculoComponent,
-          },
-        ],
       },
       { path: 'mensalistas', component: MensalistasComponent },
       { path: 'sobre', component: SobreComponent },

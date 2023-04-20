@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Garagem } from 'src/app/models/garagem';
 import { GaragemService } from 'src/app/services/garagem.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogAdicionarComponent } from './dialog-adicionar/dialog-adicionar.component';
 
 @Component({
   selector: 'app-garagem',
@@ -23,7 +24,10 @@ export class GaragemComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'acoes'];
   dataSource = new MatTableDataSource<Garagem>(this.ELEMENT_DATA);
 
-  constructor(private garagemService: GaragemService) {}
+  constructor(
+    private garagemService: GaragemService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.garagemService.getAllStudents().subscribe((garagem) => {
@@ -34,7 +38,9 @@ export class GaragemComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  onCreate() {}
+  onCreate() {
+    this.dialog.open(DialogAdicionarComponent);
+  }
 
   ngAfterViewInit() {
     //this.atualizarDoc();

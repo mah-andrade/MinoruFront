@@ -40,7 +40,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { GaragemComponent } from './components/garagem/garagem.component';
 import { MensalistasComponent } from './components/mensalistas/mensalistas.component';
 import { SobreComponent } from './components/sobre/sobre.component';
-import { AdicionarveiculoComponent } from './components/garagem/adicionarveiculo/adicionarveiculo.component';
+
 import { DialogAdicionarComponent } from './components/garagem/dialog-adicionar/dialog-adicionar.component';
 
 @NgModule({
@@ -53,7 +53,6 @@ import { DialogAdicionarComponent } from './components/garagem/dialog-adicionar/
     GaragemComponent,
     MensalistasComponent,
     SobreComponent,
-    AdicionarveiculoComponent,
     DialogAdicionarComponent,
   ],
   imports: [
@@ -94,5 +93,6 @@ import { DialogAdicionarComponent } from './components/garagem/dialog-adicionar/
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [DialogAdicionarComponent],
 })
 export class AppModule {}
