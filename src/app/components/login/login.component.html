@@ -18,16 +18,23 @@
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Senha</mat-label>
+      <mat-label>senha</mat-label>
       <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
         [formControl]="senha"
         required
         [(ngModel)]="creds.senha"
-        name="senha"
-        type="password"
-        matInput
-        placeholder="Ex. 123"
       />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
     </mat-form-field>
 
     <button

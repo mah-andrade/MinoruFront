@@ -27,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -39,9 +40,20 @@ import { MenuComponent } from './components/menu/menu.component';
 import { GaragemComponent } from './components/garagem/garagem.component';
 import { MensalistasComponent } from './components/mensalistas/mensalistas.component';
 import { SobreComponent } from './components/sobre/sobre.component';
+import { AdicionarveiculoComponent } from './components/garagem/adicionarveiculo/adicionarveiculo.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, NavComponent, MenuComponent, GaragemComponent, MensalistasComponent, SobreComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    NavComponent,
+    MenuComponent,
+    GaragemComponent,
+    MensalistasComponent,
+    SobreComponent,
+    AdicionarveiculoComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -67,6 +79,7 @@ import { SobreComponent } from './components/sobre/sobre.component';
     MatIconModule,
     MatListModule,
     MatCardModule,
+    MatDialogModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

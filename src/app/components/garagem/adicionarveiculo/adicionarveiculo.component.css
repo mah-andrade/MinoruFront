@@ -1,0 +1,40 @@
+.container {
+  height: calc(100vh - 98px);
+  margin: 16px;
+  margin-left: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  color: lightgray;
+  background: lightgray;
+  border-radius: 10px;
+}
+h1 {
+  width: 100%;
+  text-align: center;
+  color: blue;
+}
+
+.form {
+  width: 90%;
+  height: 76%;
+  margin: auto;
+  background-color: rgb(235, 235, 235);
+  padding: 4rem 1rem;
+  border-radius: 1rem;
+}
+
+.section {
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+}
+
+.full-width {
+  width: 10%;
+}
+
+button {
+  margin-top: 1.5rem;
+}

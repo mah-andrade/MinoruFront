@@ -1,0 +1,75 @@
+<div class="container">
+  <form class="form mat-elevation-z8">
+    <h1>CADASTRAR VEICULO</h1>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input
+        [(ngModel)]="garagem.nome"
+        name="nome"
+        matInput
+        placeholder="Ex. Matheus Andrade"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Telefone</mat-label>
+      <input
+        [(ngModel)]="garagem.telefone"
+        name="telefone"
+        type="number"
+        matInput
+        placeholder="Ex. (11) 946966635"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Modelo</mat-label>
+      <input
+        [(ngModel)]="garagem.modelo"
+        name="modelo"
+        matInput
+        placeholder="Ex. fox"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Veiculo</mat-label>
+      <input
+        [(ngModel)]="garagem.veiculo"
+        name="veiculo"
+        matInput
+        placeholder="Ex. (11) 946966635"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Cliente </mat-label>
+      <input
+        [(ngModel)]="garagem.cliente"
+        name="cliente"
+        matInput
+        placeholder="Ex. Avulso ou DIARIO "
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Placa</mat-label>
+      <input
+        [(ngModel)]="garagem.placa"
+        name="placa"
+        matInput
+        placeholder="Ex. BPO-0464"
+      />
+    </mat-form-field>
+
+    <button
+      (click)="cadastrar()"
+      class="full-width mat-elevation-z5"
+      mat-stroked-button
+      color="primary"
+    >
+      Login
+    </button>
+  </form>
+</div>
