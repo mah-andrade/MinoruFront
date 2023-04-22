@@ -1,4 +1,5 @@
 export interface Garagem {
+  id?: string;
   nome: string;
   telefone: string;
   modelo: string;

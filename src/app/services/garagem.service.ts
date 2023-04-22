@@ -5,14 +5,23 @@ import {
   collection,
   collectionData,
   getDocs,
+  orderBy,
 } from '@angular/fire/firestore';
 import { Garagem } from '../models/garagem';
 import { Observable } from 'rxjs';
+import { lavagem } from '../models/lavagem';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GaragemService {
+  lavagem: lavagem = {
+    modelo: '',
+    placa: '',
+    status: '',
+    horaSolicitada: '',
+  };
+
   constructor(private firestore: Firestore) {}
 
   adicionarVeiculo(garagem: Garagem) {
@@ -43,6 +52,20 @@ export class GaragemService {
       this.dataAtual()
     );
     return vecRef;
+  }
+
+  addLavagem(garagem: Garagem) {
+    this.lavagem.modelo = garagem.modelo;
+    this.lavagem.placa = garagem.placa;
+    this.lavagem.horaSolicitada = garagem.horaInicial;
+    this.lavagem.status = 'PENDENTE';
+    const lav = collection(
+      this.firestore,
+      'Lavagens',
+      'DIAS',
+      this.dataAtual()
+    );
+    return addDoc(lav, this.lavagem);
   }
 
   dataAtual() {

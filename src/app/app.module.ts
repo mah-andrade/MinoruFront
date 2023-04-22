@@ -28,6 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -42,6 +44,8 @@ import { MensalistasComponent } from './components/mensalistas/mensalistas.compo
 import { SobreComponent } from './components/sobre/sobre.component';
 
 import { DialogAdicionarComponent } from './components/garagem/dialog-adicionar/dialog-adicionar.component';
+
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -81,9 +85,15 @@ import { DialogAdicionarComponent } from './components/garagem/dialog-adicionar/
     MatListModule,
     MatCardModule,
     MatDialogModule,
+    MatButtonToggleModule,
+    MatGridListModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false,
+    }),
 
     ToastrModule.forRoot({
       timeOut: 4000,

@@ -32,6 +32,7 @@ export class GaragemComponent implements OnInit {
   ngOnInit() {
     this.garagemService.getAllStudents().subscribe((garagem) => {
       this.ELEMENT_DATA = garagem;
+      console.log(garagem);
       this.dataSource = new MatTableDataSource<Garagem>(garagem);
     });
   }
@@ -39,11 +40,22 @@ export class GaragemComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   onCreate() {
-    this.dialog.open(DialogAdicionarComponent);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+
+    this.dialog.open(DialogAdicionarComponent, dialogConfig);
   }
 
   ngAfterViewInit() {
     //this.atualizarDoc();
     this.dataSource.paginator = this.paginator;
   }
+
+  editUser(id: String) {
+    console.log(id);
+  }
+
+  finalizar() {}
 }
