@@ -45,7 +45,7 @@ export class DialogAdicionarComponent implements OnInit {
       horaAtual.getHours().toString() + ':' + horaAtual.getMinutes().toString();
     this.garagem.status = 'ATIVO';
     this.dialogRef.close();
-    this.garagemService.adicionarVeiculo(this.garagem).then(
+    this.garagemService.addCar(this.garagem).then(
       () => {
         this.toast.success('Adicionado com sucesso!');
         if (this.checkLavagem.valid) {

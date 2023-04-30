@@ -46,6 +46,8 @@ import { SobreComponent } from './components/sobre/sobre.component';
 import { DialogAdicionarComponent } from './components/garagem/dialog-adicionar/dialog-adicionar.component';
 
 import { NgxMaskModule } from 'ngx-mask';
+import { DialogEditarComponent } from './components/garagem/dialog-editar/dialog-editar.component';
+import { DialogFinalizarComponent } from './components/garagem/dialog-finalizar/dialog-finalizar.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { NgxMaskModule } from 'ngx-mask';
     MensalistasComponent,
     SobreComponent,
     DialogAdicionarComponent,
+    DialogEditarComponent,
+    DialogFinalizarComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,6 +107,10 @@ import { NgxMaskModule } from 'ngx-mask';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DialogAdicionarComponent],
+  entryComponents: [
+    DialogAdicionarComponent,
+    DialogFinalizarComponent,
+    DialogEditarComponent,
+  ],
 })
 export class AppModule {}

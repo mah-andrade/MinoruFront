@@ -22,10 +22,10 @@
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef>Açoes</th>
       <td mat-cell *matCellDef="let element">
-        <button class="material-icons" (click)="editUser(element.id)">
-          edit
+        <button class="material-icons" (click)="editUser(element)">edit</button>
+        <button class="material-icons" (click)="finalizar(element)">
+          check
         </button>
-        <button class="material-icons" (click)="finalizar()">check</button>
       </td>
     </ng-container>
 

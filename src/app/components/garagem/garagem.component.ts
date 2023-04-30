@@ -12,6 +12,7 @@ import { Garagem } from 'src/app/models/garagem';
 import { GaragemService } from 'src/app/services/garagem.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogAdicionarComponent } from './dialog-adicionar/dialog-adicionar.component';
+import { DialogFinalizarComponent } from './dialog-finalizar/dialog-finalizar.component';
 
 @Component({
   selector: 'app-garagem',
@@ -30,7 +31,7 @@ export class GaragemComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.garagemService.getAllStudents().subscribe((garagem) => {
+    this.garagemService.getAllCars().subscribe((garagem) => {
       this.ELEMENT_DATA = garagem;
       console.log(garagem);
       this.dataSource = new MatTableDataSource<Garagem>(garagem);
@@ -53,9 +54,16 @@ export class GaragemComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  editUser(id: String) {
-    console.log(id);
-  }
+  editUser(garagem: Garagem) {}
 
-  finalizar() {}
+  finalizar(garagem: Garagem) {
+    console.log(garagem);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+    dialogConfig.data = garagem;
+
+    this.dialog.open(DialogFinalizarComponent, dialogConfig);
+  }
 }
