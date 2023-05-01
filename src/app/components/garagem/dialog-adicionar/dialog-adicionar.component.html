@@ -37,7 +37,6 @@
       matInput
       placeholder="Ex. Padrao MERCOSUL/ANTIGOm"
       mask="SSS-0A00"
-      [validation]="true"
     /> </mat-form-field
   ><br />
 
@@ -77,8 +76,10 @@
     <mat-radio-button value="MOTO">MOTO</mat-radio-button> </mat-radio-group
   ><br /><br />
 
-  <section [formControl]="checkLavagem" required>
-    <mat-checkbox>Deseja realizar lavagem no veiculo!</mat-checkbox>
+  <section>
+    <mat-checkbox [formControl]="checkLavagem"
+      >Deseja realizar lavagem no veiculo!</mat-checkbox
+    >
   </section>
   <br />
 

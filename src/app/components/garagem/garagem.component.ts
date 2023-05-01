@@ -13,6 +13,7 @@ import { GaragemService } from 'src/app/services/garagem.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogAdicionarComponent } from './dialog-adicionar/dialog-adicionar.component';
 import { DialogFinalizarComponent } from './dialog-finalizar/dialog-finalizar.component';
+import { DialogEditarComponent } from './dialog-editar/dialog-editar.component';
 
 @Component({
   selector: 'app-garagem',
@@ -54,10 +55,7 @@ export class GaragemComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  editUser(garagem: Garagem) {}
-
-  finalizar(garagem: Garagem) {
-    console.log(garagem);
+  editUser(garagem: Garagem) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -65,5 +63,15 @@ export class GaragemComponent implements OnInit {
     dialogConfig.data = garagem;
 
     this.dialog.open(DialogFinalizarComponent, dialogConfig);
+  }
+
+  finalizar(garagem: Garagem) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+    dialogConfig.data = garagem;
+
+    this.dialog.open(DialogEditarComponent, dialogConfig);
   }
 }

@@ -8,6 +8,7 @@
     required
     name="selectEstaci"
     [(ngModel)]="garagem.cliente"
+    [disabled]="true"
   >
     <mat-button-toggle value="AVULSO">AVULSO</mat-button-toggle>
     <mat-button-toggle value="DIARIO"
@@ -72,13 +73,16 @@
     required
     [(ngModel)]="garagem.veiculo"
     required
+    [disabled]="true"
   >
     <mat-radio-button value="CARRO" true>CARRO</mat-radio-button>
     <mat-radio-button value="MOTO">MOTO</mat-radio-button> </mat-radio-group
   ><br /><br />
 
   <section [formControl]="checkLavagem" required>
-    <mat-checkbox>Deseja realizar lavagem no veiculo!</mat-checkbox>
+    <mat-checkbox [checked]="validaLavagem()" [disabled]="true"
+      >Deseja realizar lavagem no veiculo!</mat-checkbox
+    >
   </section>
   <br />
 
@@ -89,7 +93,7 @@
     color="primary"
     [disabled]="!validaCampos()"
   >
-    CADASTRAR
+    ATUALIZAR
   </button>
   <button
     (click)="dialogClose()"
@@ -98,5 +102,14 @@
     color="primary"
   >
     CANCELAR
+  </button>
+  <button
+    (click)="deletar()"
+    class="full-width mat-elevation-z5"
+    mat-stroked-button
+    color="primary"
+    [disabled]="!validaHorario()"
+  >
+    <i class="material-icons">delete</i>
   </button>
 </form>

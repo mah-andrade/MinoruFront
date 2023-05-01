@@ -12,22 +12,17 @@ import {
   where,
   query,
   FieldPath,
+  deleteDoc,
+  getFirestore,
+  setDoc,
 } from '@angular/fire/firestore';
 import { Garagem } from '../models/garagem';
 import { Observable } from 'rxjs';
-import { lavagem } from '../models/lavagem';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GaragemService {
-  lavagem: lavagem = {
-    modelo: '',
-    placa: '',
-    status: '',
-    horaSolicitada: '',
-  };
-
   constructor(private firestore: Firestore) {}
 
   addCar(garagem: Garagem) {
@@ -50,23 +45,16 @@ export class GaragemService {
     return vecRef;
   }
 
-  async getDocument(garagem: Garagem) {
-    //const doc = doc(this.getCollection,'id',id)
-    //return query(this.getCollection(),where(FieldPath.documentId(), '==' , id));
+  updateCar(garagem: Garagem) {
+    const db = getFirestore();
+    const docRef = doc(db, 'Veiculo/DIAS/' + this.dataAtual(), garagem.id);
+    return setDoc(docRef, garagem);
   }
 
-  addLavagem(garagem: Garagem) {
-    this.lavagem.modelo = garagem.modelo;
-    this.lavagem.placa = garagem.placa;
-    this.lavagem.horaSolicitada = garagem.horaInicial;
-    this.lavagem.status = 'PENDENTE';
-    const lav = collection(
-      this.firestore,
-      'Lavagens',
-      'DIAS',
-      this.dataAtual()
-    );
-    return addDoc(lav, this.lavagem);
+  deleteCar(id: string) {
+    const db = getFirestore();
+    const docRef = doc(db, 'Veiculo/DIAS/' + this.dataAtual(), id);
+    return deleteDoc(docRef);
   }
 
   dataAtual() {

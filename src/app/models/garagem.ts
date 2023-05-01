@@ -8,4 +8,6 @@ export interface Garagem {
   horaInicial: string;
   placa: string;
   status: string;
+  lavagem: string;
+  statusLavagem: string;
 }

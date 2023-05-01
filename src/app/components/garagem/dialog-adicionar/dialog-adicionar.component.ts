@@ -20,15 +20,17 @@ export class DialogAdicionarComponent implements OnInit {
     horaInicial: '',
     placa: '',
     status: '',
+    lavagem: '',
+    statusLavagem: '',
   };
 
   nome = new FormControl(null, Validators.minLength(3));
   telefone = new FormControl(null);
   modelo = new FormControl(null, Validators.minLength(3));
   placa = new FormControl(null);
-  checkButton = new FormControl();
-  radioButton = new FormControl();
-  checkLavagem = new FormControl();
+  checkButton = new FormControl(null);
+  radioButton = new FormControl(null);
+  checkLavagem = new FormControl(null, Validators.required);
 
   constructor(
     private garagemService: GaragemService,
@@ -39,27 +41,39 @@ export class DialogAdicionarComponent implements OnInit {
   ngOnInit(): void {}
 
   cadastrar() {
-    this.garagem.placa.toUpperCase();
     var horaAtual = new Date();
-    this.garagem.horaInicial =
-      horaAtual.getHours().toString() + ':' + horaAtual.getMinutes().toString();
+    var min, hour;
+
+    if (horaAtual.getHours() <= 9) {
+      hour = '0' + horaAtual.getHours();
+    } else {
+      hour = horaAtual.getHours();
+    }
+
+    console.log();
+    if (horaAtual.getMinutes() <= 9) {
+      min = '0' + horaAtual.getMinutes();
+    } else {
+      min = horaAtual.getMinutes();
+    }
+
+    if (this.checkLavagem.valid) {
+      this.garagem.lavagem = 'LAVAGEM';
+      this.garagem.statusLavagem = 'PENDENTE';
+    }
+
+    this.garagem.horaInicial = hour + ':' + min;
     this.garagem.status = 'ATIVO';
+    this.garagem.placa = this.garagem.placa.toUpperCase();
     this.dialogRef.close();
     this.garagemService.addCar(this.garagem).then(
       () => {
         this.toast.success('Adicionado com sucesso!');
-        if (this.checkLavagem.valid) {
-          this.addLavagem();
-        }
       },
       (err) => {
         this.toast.error('Erro ao adicionar o usuario!');
       }
     );
-  }
-
-  addLavagem() {
-    this.garagemService.addLavagem(this.garagem);
   }
 
   validaCampos(): boolean {
