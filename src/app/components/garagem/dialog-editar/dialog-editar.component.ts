@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { el } from 'date-fns/locale';
+import { ToastrService } from 'ngx-toastr';
 import { Garagem } from 'src/app/models/garagem';
 import { GaragemService } from 'src/app/services/garagem.service';
 
@@ -28,7 +30,8 @@ export class DialogEditarComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<DialogEditarComponent>,
-    private garagemservice: GaragemService
+    private garagemservice: GaragemService,
+    private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -47,84 +50,70 @@ export class DialogEditarComponent implements OnInit {
     this.calcularValor();
 
     var dataAtual = new Date();
-    this.dataFormat = dataAtual.getHours() + ':' + dataAtual.getMinutes();
+    var auxhora, auxmin;
+
+    if (dataAtual.getHours() < 10) {
+      auxhora = '0' + dataAtual.getHours();
+    } else {
+      auxhora = dataAtual.getHours();
+    }
+
+    if (dataAtual.getMinutes() < 10) {
+      auxmin = '0' + dataAtual.getMinutes();
+    } else {
+      auxmin = dataAtual.getMinutes();
+    }
+    this.dataFormat = auxhora + ':' + auxmin;
   }
 
   dialogClose() {
     this.dialogRef.close();
   }
 
-  calcularValor() {
-    let valores = 0;
+  async calcularValor() {
+    let avulso = 0;
     let lavagem = 0;
-    // 2 Possibilade avulso diario
-    if (this.garagem.cliente === 'DIARIO') {
-      let valoresEst: Object;
+    let diario = 0;
 
-      this.garagemservice.returnDocument(this.garagem.veiculo).then((dados) => {
-        valoresEst = dados;
-        lavagem = valoresEst['diario'];
-        valores = valoresEst['lavagem'];
-        console.log('var ' + lavagem + 'var valor' + valores);
-      });
+    //PEGANDO O DOCUMENTO DO BD
+    let valoresEst: Object;
+    this.garagemservice.returnDocument(this.garagem.veiculo).then((dados) => {
+      valoresEst = dados;
+      lavagem = valoresEst['lavagem'];
+      diario = valoresEst['diario'];
+      avulso = valoresEst['avulso'];
 
-      var recebe = this.garagemservice.returnValorDiario(this.garagem.veiculo);
-      console.log(recebe);
-      recebe.then(
-        (succes) => {
-          if (this.garagem.lavagem === 'LAVAGEM') {
-            var docLavagem = this.garagemservice.returnValorLavagem(
-              this.garagem.veiculo
-            );
-            docLavagem.then((succesLavagem) => {
-              this.valorPagar = succes + succesLavagem;
-            });
-          } else {
-            this.valorPagar = succes;
-          }
-        },
-        (error) => {}
-      );
-    } else {
-      var hour = this.garagem.horaInicial.split(':');
-      var minInicial = this.converteMin(hour[0], hour[1]);
-      var horaAtual = new Date();
-      var minFinal = this.converteMin(
-        horaAtual.getHours(),
-        horaAtual.getMinutes()
-      );
-
-      //CAPTANDO OS VALORES NO BD
-
-      var recebe = this.garagemservice.returnValor(
-        this.garagem.cliente,
-        this.garagem.veiculo
-      );
-      recebe.then(
-        (dados) => {
-          this.valorPagar = dados;
-        },
-        (err) => {}
-      );
-
-      if (minFinal - minInicial >= 60) {
-        var hours = Math.floor((minFinal - minInicial) / 60);
-
-        var recebe = this.garagemservice.returnValor(
-          this.garagem.cliente,
-          this.garagem.veiculo
-        );
-        recebe.then(
-          (dados) => {
-            this.valorPagar = dados * (hours + 1);
-          },
-          (err) => {}
-        );
-
-        this.valorPagar = this.valorPagar * (hours + 1);
+      if (this.garagem.cliente === 'DIARIO') {
+        if (this.garagem.lavagem === 'LAVAGEM') {
+          this.valorPagar = diario + lavagem;
+        } else {
+          this.valorPagar = diario;
+        }
       } else {
+        var hour = this.garagem.horaInicial.split(':');
+        var minInicial = this.converteMin(hour[0], hour[1]);
+        var horaAtual = new Date();
+        var minFinal = this.converteMin(
+          horaAtual.getHours(),
+          horaAtual.getMinutes()
+        );
+
+        if (minFinal - minInicial >= 60) {
+          if (this.garagem.lavagem === 'LAVAGEM') {
+            var hours = Math.floor((minFinal - minInicial) / 60);
+            this.valorPagar = avulso * (hours + 1) + lavagem;
+          } else {
+            var hours = Math.floor((minFinal - minInicial) / 60);
+            this.valorPagar = avulso * (hours + 1);
+          }
+        } else {
+          if (this.garagem.lavagem === 'LAVAGEM') {
+            this.valorPagar = avulso + lavagem;
+          }
+          this.valorPagar = avulso;
+        }
       }
-    }
+    });
   }
 
   converteMin(hh: any, mm: any): number {
@@ -136,7 +125,26 @@ export class DialogEditarComponent implements OnInit {
   }
 
   finalizar(valor: any) {
-    console.log(valor);
-    this.dialogRef.close();
+    // salvar os valores
+
+    let obj: Object;
+
+    this.garagemservice.returnMensal().then((dados) => {
+      obj = dados;
+      var aux = dados['valorRendimento'];
+      aux += valor;
+      obj['valorRendimento'] = aux;
+      this.garagemservice.updateRendimento(obj).then(
+        (sucess) => {
+          this.garagem.status = 'FINALIZADO';
+          this.garagemservice.updateCar(this.garagem);
+          this.dialogRef.close();
+          this.toast.success('Finalizado com Sucesso');
+        },
+        (err) => {
+          this.toast.error('ERRO');
+        }
+      );
+    });
   }
 }

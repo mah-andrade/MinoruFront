@@ -77,66 +77,6 @@ export class GaragemService {
     return diaHoje + '.' + mesHoje + '.' + anoHoje;
   }
 
-  async returnValor(cliente: string, veiculo: string) {
-    const db = getFirestore();
-    var docRef;
-
-    if (veiculo === 'CARRO') {
-      docRef = doc(db, 'ValorEstacionamento', 'Carro');
-    } else {
-      docRef = doc(db, 'ValorEstacionamento', 'Moto');
-    }
-
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      if (cliente === 'DIARIO') {
-        return docSnap.get('avulso');
-      } else {
-        return docSnap.get('avulso');
-      }
-    } else {
-      return 'ERROR';
-    }
-  }
-
-  async returnValorDiario(veiculo: string) {
-    const db = getFirestore();
-    var docRef;
-
-    if (veiculo === 'CARRO') {
-      docRef = doc(db, 'ValorEstacionamento', 'Carro');
-    } else {
-      docRef = doc(db, 'ValorEstacionamento', 'Moto');
-    }
-
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      return docSnap.get('diario');
-    } else {
-      return 'ERROR';
-    }
-  }
-  async returnValorLavagem(veiculo: string) {
-    const db = getFirestore();
-    var docRef;
-
-    if (veiculo === 'CARRO') {
-      docRef = doc(db, 'ValorEstacionamento', 'Carro');
-    } else {
-      docRef = doc(db, 'ValorEstacionamento', 'Moto');
-    }
-
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      return docSnap.get('lavagem');
-    } else {
-      return 'ERROR';
-    }
-  }
-
   async returnDocument(veiculo: string) {
     const db = getFirestore();
     var docRef;
@@ -146,6 +86,23 @@ export class GaragemService {
     } else {
       docRef = doc(db, 'ValorEstacionamento', 'Moto');
     }
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      return 'ERROR';
+    }
+  }
+
+  async returnMensal() {
+    var data = new Date();
+    const db = getFirestore();
+    var docRef = doc(
+      db,
+      'Mensal',
+      data.getMonth() + 1 + data.getFullYear().toString()
+    );
 
     const docSnap = await getDoc(docRef);
 
@@ -154,5 +111,16 @@ export class GaragemService {
     } else {
       return 'ERROR';
     }
+  }
+
+  updateRendimento(Obj: Object) {
+    var data = new Date();
+    const db = getFirestore();
+    var docRef = doc(
+      db,
+      'Mensal',
+      data.getMonth() + 1 + data.getFullYear().toString()
+    );
+    return setDoc(docRef, Obj);
   }
 }
