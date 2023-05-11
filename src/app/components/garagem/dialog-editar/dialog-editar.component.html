@@ -1,1 +1,34 @@
-<p>dialog-editar works!</p>
+<form class="form mat-elevation-z2">
+  <img src="assets/img/erfil2.png" /><br /><br />
+  <h1><strong>Nome:</strong> {{ garagem.nome }}</h1>
+  <br />
+  <h1>
+    <strong>Modelo:</strong> {{ garagem.modelo }} &nbsp; &nbsp; &nbsp;
+    <strong>Placa:</strong> {{ garagem.placa }}
+  </h1>
+  <h1>
+    <strong>Horario de entrada:</strong> {{ garagem.horaInicial }} &nbsp; &nbsp;
+    &nbsp; <strong>Horario de saida:</strong> {{ dataFormat }}
+  </h1>
+  <h1>
+    <strong>Valor a pagar:</strong> <strong> {{ valorPagar }}</strong>
+  </h1>
+
+  <button
+    (click)="finalizar(valorPagar)"
+    class="full-width mat-elevation-z5"
+    mat-stroked-button
+    color="primary"
+  >
+    FINALIZAR
+  </button>
+
+  <button
+    (click)="dialogClose()"
+    class="full-width mat-elevation-z5"
+    mat-stroked-button
+    color="primary"
+  >
+    CANCELAR
+  </button>
+</form>

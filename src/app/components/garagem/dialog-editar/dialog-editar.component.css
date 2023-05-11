@@ -1,0 +1,10 @@
+.form {
+  width: auto;
+  margin: auto;
+  background-color: rgb(235, 235, 235);
+  padding: 4rem 1rem;
+  border-radius: 1rem;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}

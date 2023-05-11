@@ -18,6 +18,7 @@ import {
 } from '@angular/fire/firestore';
 import { Garagem } from '../models/garagem';
 import { Observable } from 'rxjs';
+import { el } from 'date-fns/locale';
 
 @Injectable({
   providedIn: 'root',
@@ -30,9 +31,12 @@ export class GaragemService {
   }
 
   getAllCars(): Observable<Garagem[]> {
-    return collectionData(this.getCollection(), {
-      idField: 'id',
-    }) as Observable<Garagem[]>;
+    return collectionData(
+      query(this.getCollection(), where('status', '==', 'ATIVO')),
+      {
+        idField: 'id',
+      }
+    ) as Observable<Garagem[]>;
   }
 
   getCollection() {
@@ -71,5 +75,84 @@ export class GaragemService {
       diaHoje = '0' + diaHoje;
     }
     return diaHoje + '.' + mesHoje + '.' + anoHoje;
+  }
+
+  async returnValor(cliente: string, veiculo: string) {
+    const db = getFirestore();
+    var docRef;
+
+    if (veiculo === 'CARRO') {
+      docRef = doc(db, 'ValorEstacionamento', 'Carro');
+    } else {
+      docRef = doc(db, 'ValorEstacionamento', 'Moto');
+    }
+
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      if (cliente === 'DIARIO') {
+        return docSnap.get('avulso');
+      } else {
+        return docSnap.get('avulso');
+      }
+    } else {
+      return 'ERROR';
+    }
+  }
+
+  async returnValorDiario(veiculo: string) {
+    const db = getFirestore();
+    var docRef;
+
+    if (veiculo === 'CARRO') {
+      docRef = doc(db, 'ValorEstacionamento', 'Carro');
+    } else {
+      docRef = doc(db, 'ValorEstacionamento', 'Moto');
+    }
+
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.get('diario');
+    } else {
+      return 'ERROR';
+    }
+  }
+  async returnValorLavagem(veiculo: string) {
+    const db = getFirestore();
+    var docRef;
+
+    if (veiculo === 'CARRO') {
+      docRef = doc(db, 'ValorEstacionamento', 'Carro');
+    } else {
+      docRef = doc(db, 'ValorEstacionamento', 'Moto');
+    }
+
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.get('lavagem');
+    } else {
+      return 'ERROR';
+    }
+  }
+
+  async returnDocument(veiculo: string) {
+    const db = getFirestore();
+    var docRef;
+
+    if (veiculo === 'CARRO') {
+      docRef = doc(db, 'ValorEstacionamento', 'Carro');
+    } else {
+      docRef = doc(db, 'ValorEstacionamento', 'Moto');
+    }
+
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      return 'ERROR';
+    }
   }
 }
