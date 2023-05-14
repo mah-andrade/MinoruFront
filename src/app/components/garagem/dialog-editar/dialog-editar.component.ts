@@ -101,7 +101,12 @@ export class DialogEditarComponent implements OnInit {
         if (minFinal - minInicial >= 60) {
           if (this.garagem.lavagem === 'LAVAGEM') {
             var hours = Math.floor((minFinal - minInicial) / 60);
-            this.valorPagar = avulso * (hours + 1) + lavagem;
+
+            if (hours == 1) {
+              this.valorPagar = avulso * (hours + 1) + lavagem;
+            } else {
+              this.valorPagar = avulso * hours + lavagem;
+            }
           } else {
             var hours = Math.floor((minFinal - minInicial) / 60);
             this.valorPagar = avulso * (hours + 1);
@@ -109,8 +114,9 @@ export class DialogEditarComponent implements OnInit {
         } else {
           if (this.garagem.lavagem === 'LAVAGEM') {
             this.valorPagar = avulso + lavagem;
+          } else {
+            this.valorPagar = avulso;
           }
-          this.valorPagar = avulso;
         }
       }
     });

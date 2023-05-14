@@ -34,7 +34,7 @@ export class GaragemComponent implements OnInit {
   ngOnInit() {
     this.garagemService.getAllCars().subscribe((garagem) => {
       this.ELEMENT_DATA = garagem;
-      console.log(garagem);
+
       this.dataSource = new MatTableDataSource<Garagem>(garagem);
     });
   }
@@ -51,7 +51,6 @@ export class GaragemComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    //this.atualizarDoc();
     this.dataSource.paginator = this.paginator;
   }
 

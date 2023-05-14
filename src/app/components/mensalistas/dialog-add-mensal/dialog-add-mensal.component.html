@@ -1,0 +1,136 @@
+<form class="form mat-elevation-z2">
+  <img src="assets/img/logo-minoruOld.png" />
+
+  <h1>CADASTRO DE MENSALISTAS</h1>
+
+  <br />
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input
+      name="nome"
+      matInput
+      placeholder="Ex. Matheus Andrade"
+      [formControl]="nome"
+      required
+      [(ngModel)]="mensalistas.nome"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Placa</mat-label>
+    <input
+      [formControl]="placa"
+      required
+      [(ngModel)]="mensalistas.placa"
+      name="placa"
+      matInput
+      placeholder="Ex. Padrao MERCOSUL/ANTIGOm"
+      mask="SSS-0A00"
+    /> </mat-form-field
+  ><br />
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Telefone</mat-label>
+    <input
+      [formControl]="telefone"
+      required
+      [(ngModel)]="mensalistas.tel"
+      name="telefone"
+      matInput
+      placeholder="Ex. (11) 94696-6635"
+      mask="(00)  00000-0000"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Data de nascimento</mat-label>
+    <input
+      [formControl]="dataNascimento"
+      required
+      [(ngModel)]="mensalistas.dataNascimento"
+      name="dataNascimento"
+      matInput
+      placeholder="Ex. 06/02/2003"
+      mask="00/00/0000"
+    /> </mat-form-field
+  ><br />
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>CPF</mat-label>
+    <input
+      [formControl]="cpf"
+      required
+      [(ngModel)]="mensalistas.cpf"
+      name="cpf"
+      matInput
+      placeholder="Ex. 234.234.231-23"
+      mask="000.000.000-00"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Modelo</mat-label>
+    <input
+      [formControl]="modelo"
+      required
+      [(ngModel)]="mensalistas.modelo"
+      name="modelo"
+      matInput
+      placeholder="Ex. Toyota Corolla"
+    /> </mat-form-field
+  ><br />
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Endereço</mat-label>
+    <input
+      [formControl]="endereco"
+      required
+      [(ngModel)]="mensalistas.endereco"
+      name="endereco"
+      matInput
+      placeholder="Ex. Avenida Tiradents ,32"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Email - (OPCIONAL)</mat-label>
+    <input
+      [formControl]="email"
+      [(ngModel)]="mensalistas.email"
+      name="email"
+      matInput
+      placeholder="Ex. Toyota Corolla"
+    /> </mat-form-field
+  ><br />
+
+  <mat-radio-group class="radiobutton">
+    <mat-radio-button value="CARRO">CARRO</mat-radio-button>
+    <mat-radio-button value="MOTO">MOTO</mat-radio-button> </mat-radio-group
+  ><br />
+
+  <section>
+    <mat-checkbox [formControl]="checkAcessSistem"
+      >Deseja criar uma conta no sistema?</mat-checkbox
+    >
+  </section>
+  <br />
+
+  <button
+    (click)="cadastrar()"
+    class="full-width mat-elevation-z5"
+    mat-stroked-button
+    color="primary"
+    [disabled]="validaCampos()"
+  >
+    CADASTRAR
+  </button>
+  <button
+    (click)="dialogClose()"
+    class="full-width mat-elevation-z5"
+    mat-stroked-button
+    color="primary"
+  >
+    CANCELAR
+  </button>
+</form>

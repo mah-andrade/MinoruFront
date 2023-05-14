@@ -18,7 +18,6 @@ import {
 } from '@angular/fire/firestore';
 import { Garagem } from '../models/garagem';
 import { Observable } from 'rxjs';
-import { el } from 'date-fns/locale';
 
 @Injectable({
   providedIn: 'root',
@@ -122,5 +121,14 @@ export class GaragemService {
       data.getMonth() + 1 + data.getFullYear().toString()
     );
     return setDoc(docRef, Obj);
+  }
+
+  async quantityCars() {
+    const db = getFirestore();
+    const q = query(this.getCollection(), where('status', '==', 'ATIVO'));
+
+    const querySnapshot = await getDocs(q);
+
+    return querySnapshot.size;
   }
 }

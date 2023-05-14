@@ -50,7 +50,6 @@ export class DialogAdicionarComponent implements OnInit {
       hour = horaAtual.getHours();
     }
 
-    console.log();
     if (horaAtual.getMinutes() <= 9) {
       min = '0' + horaAtual.getMinutes();
     } else {
@@ -66,14 +65,21 @@ export class DialogAdicionarComponent implements OnInit {
     this.garagem.status = 'ATIVO';
     this.garagem.placa = this.garagem.placa.toUpperCase();
     this.dialogRef.close();
-    this.garagemService.addCar(this.garagem).then(
-      () => {
-        this.toast.success('Adicionado com sucesso!');
-      },
-      (err) => {
-        this.toast.error('Erro ao adicionar o usuario!');
+
+    this.garagemService.quantityCars().then((dados) => {
+      if (dados < 45) {
+        this.garagemService.addCar(this.garagem).then(
+          () => {
+            this.toast.success('Adicionado com sucesso!');
+          },
+          (err) => {
+            this.toast.error('Erro ao adicionar o usuario!');
+          }
+        );
+      } else {
+        this.toast.error('Erro estacionamento Cheio!');
       }
-    );
+    });
   }
 
   validaCampos(): boolean {
