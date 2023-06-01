@@ -13,7 +13,13 @@
 }
 
 .tabela {
-  width: 70%;
-  height: auto;
-  background-color: white;
+  text-align: right;
+  margin: auto;
+  max-height: calc(100vh - 98px);
+  height: 50%;
+  width: 500px;
+}
+
+.button {
+  text-align: right;
 }

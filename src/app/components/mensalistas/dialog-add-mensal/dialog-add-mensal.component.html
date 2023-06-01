@@ -1,11 +1,11 @@
-<form class="form mat-elevation-z2">
-  <img src="assets/img/logo-minoruOld.png" />
+<form class="form">
+  <img src="assets/img/logo-minoruOld.png" width="200px" height="100px" />
 
   <h1>CADASTRO DE MENSALISTAS</h1>
 
   <br />
 
-  <mat-form-field class="full-width" appearance="fill">
+  <mat-form-field class="full-width" appearance="outline">
     <mat-label>Nome</mat-label>
     <input
       name="nome"
@@ -15,9 +15,10 @@
       required
       [(ngModel)]="mensalistas.nome"
     />
+    <mat-error>Digite o nome com no minimo 3 caracteres</mat-error>
   </mat-form-field>
 
-  <mat-form-field class="full-width" appearance="fill">
+  <mat-form-field class="full-width" appearance="outline">
     <mat-label>Placa</mat-label>
     <input
       [formControl]="placa"
@@ -27,10 +28,13 @@
       matInput
       placeholder="Ex. Padrao MERCOSUL/ANTIGOm"
       mask="SSS-0A00"
-    /> </mat-form-field
+    />
+    <mat-error
+      >Placa no padrao mercosul ou padrao antigo</mat-error
+    > </mat-form-field
   ><br />
 
-  <mat-form-field class="full-width" appearance="fill">
+  <mat-form-field class="full-width" appearance="outline">
     <mat-label>Telefone</mat-label>
     <input
       [formControl]="telefone"
@@ -41,35 +45,40 @@
       placeholder="Ex. (11) 94696-6635"
       mask="(00)  00000-0000"
     />
+    <mat-error>Complete o campo corretamente o telefone</mat-error>
   </mat-form-field>
 
-  <mat-form-field class="full-width" appearance="fill">
+  <mat-form-field class="full-width" appearance="outline">
     <mat-label>Data de nascimento</mat-label>
     <input
       [formControl]="dataNascimento"
       required
       [(ngModel)]="mensalistas.dataNascimento"
       name="dataNascimento"
+      [hiddenInput]="true"
       matInput
       placeholder="Ex. 06/02/2003"
       mask="00/00/0000"
-    /> </mat-form-field
+    />
+    <mat-error>Complete o campo data de nascimento</mat-error> </mat-form-field
   ><br />
 
-  <mat-form-field class="full-width" appearance="fill">
+  <mat-form-field class="full-width" appearance="outline">
     <mat-label>CPF</mat-label>
     <input
       [formControl]="cpf"
       required
       [(ngModel)]="mensalistas.cpf"
       name="cpf"
+      [hiddenInput]="true"
       matInput
       placeholder="Ex. 234.234.231-23"
       mask="000.000.000-00"
     />
+    <mat-error>Digite corretamente o CPF</mat-error>
   </mat-form-field>
 
-  <mat-form-field class="full-width" appearance="fill">
+  <mat-form-field class="full-width" appearance="outline">
     <mat-label>Modelo</mat-label>
     <input
       [formControl]="modelo"
@@ -78,10 +87,13 @@
       name="modelo"
       matInput
       placeholder="Ex. Toyota Corolla"
-    /> </mat-form-field
+    />
+    <mat-error
+      >Digite o modelo do veiculo com no minimo 3 Caracteres</mat-error
+    > </mat-form-field
   ><br />
 
-  <mat-form-field class="full-width" appearance="fill">
+  <mat-form-field class="full-width" appearance="outline">
     <mat-label>Endereço</mat-label>
     <input
       [formControl]="endereco"
@@ -91,37 +103,49 @@
       matInput
       placeholder="Ex. Avenida Tiradents ,32"
     />
+    <mat-error>Digite o endereco com no minimo 3 caracteres</mat-error>
   </mat-form-field>
 
-  <mat-form-field class="full-width" appearance="fill">
+  <mat-form-field class="full-width" appearance="outline">
     <mat-label>Email - (OPCIONAL)</mat-label>
     <input
       [formControl]="email"
       [(ngModel)]="mensalistas.email"
       name="email"
       matInput
-      placeholder="Ex. Toyota Corolla"
+      placeholder="Ex. matheus@fatec.com"
     /> </mat-form-field
   ><br />
 
-  <mat-radio-group class="radiobutton">
-    <mat-radio-button value="CARRO">CARRO</mat-radio-button>
-    <mat-radio-button value="MOTO">MOTO</mat-radio-button> </mat-radio-group
+  <mat-radio-group
+    class="radiobutton"
+    [formControl]="radioButton"
+    required
+    [(ngModel)]="mensalistas.veiculo"
+  >
+    <mat-radio-button value="CARRO" (click)="carValor()"
+      >CARRO</mat-radio-button
+    >
+    <mat-radio-button value="MOTO" (click)="carMoto()"
+      >MOTO</mat-radio-button
+    > </mat-radio-group
   ><br />
 
   <section>
-    <mat-checkbox [formControl]="checkAcessSistem"
+    <mat-checkbox [formControl]="checkAcessSistem" [disabled]="!validaEmail()"
       >Deseja criar uma conta no sistema?</mat-checkbox
     >
   </section>
   <br />
+
+  <h1>VALOR A PAGAR:{{ valorPagar }}</h1>
 
   <button
     (click)="cadastrar()"
     class="full-width mat-elevation-z5"
     mat-stroked-button
     color="primary"
-    [disabled]="validaCampos()"
+    [disabled]="!validaCampos()"
   >
     CADASTRAR
   </button>

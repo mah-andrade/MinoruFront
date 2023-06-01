@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   Firestore,
+  addDoc,
   collection,
   collectionData,
   query,
@@ -19,11 +20,17 @@ export class MensalistasService {
     return collectionData(
       query(
         collection(this.firestore, 'Mensalistas'),
-        where('contrato', '==', 'ATIVO')
+        where('contrato', '==', true)
       ),
       {
         idField: 'id',
       }
     ) as Observable<Mensalistas[]>;
+  }
+
+  getCollection() {}
+
+  addCar(mensalistas: Mensalistas) {
+    return addDoc(collection(this.firestore, 'Mensalistas'), mensalistas);
   }
 }
