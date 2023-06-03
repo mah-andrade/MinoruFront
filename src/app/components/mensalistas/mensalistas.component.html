@@ -32,8 +32,12 @@
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef>Açoes</th>
         <td mat-cell *matCellDef="let element">
-          <button class="material-icons">edit</button>
-          <button class="material-icons">check</button>
+          <button class="material-icons" (click)="openEdit(element)">
+            edit
+          </button>
+          <button class="material-icons" (click)="openCheck(element)">
+            check
+          </button>
         </td>
       </ng-container>
 

@@ -12,4 +12,5 @@ export interface Mensalistas {
   placa: string;
   tel: string;
   veiculo: string;
+  acessAccount: boolean;
 }

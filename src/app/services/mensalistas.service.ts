@@ -6,6 +6,9 @@ import {
   collectionData,
   query,
   where,
+  getFirestore,
+  doc,
+  setDoc,
 } from '@angular/fire/firestore';
 import { Mensalistas } from '../models/mensalistas';
 import { Observable } from 'rxjs';
@@ -32,5 +35,11 @@ export class MensalistasService {
 
   addCar(mensalistas: Mensalistas) {
     return addDoc(collection(this.firestore, 'Mensalistas'), mensalistas);
+  }
+
+  updateMensal(mensalistas: Mensalistas) {
+    const db = getFirestore();
+    var docRef = doc(db, 'Mensalistas', mensalistas.id);
+    return setDoc(docRef, mensalistas);
   }
 }

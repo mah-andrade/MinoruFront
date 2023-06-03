@@ -27,6 +27,7 @@ export class DialogAddMensalComponent implements OnInit {
     placa: '',
     tel: '',
     veiculo: '',
+    acessAccount: false,
   };
 
   valorCar: number;
@@ -43,7 +44,6 @@ export class DialogAddMensalComponent implements OnInit {
   dataNascimento = new FormControl(null);
   cpf = new FormControl(null);
   endereco = new FormControl(null, Validators.minLength(3));
-
   email = new FormControl(null, Validators.email);
 
   //check checkbox
@@ -120,12 +120,16 @@ export class DialogAddMensalComponent implements OnInit {
         console.log('ACESSO EMAIL');
         createUserWithEmailAndPassword(auth, email, senha).then(
           (sucess) => {
+            this.mensalistas.acessAccount = true;
             this.cadastrarBd(this.mensalistas).then((sucess) => {
               this.dialogRef.close();
               this.toast.success('SUCESSO AO CADASTRAR!');
             });
           },
-          (err) => {}
+          (err) => {
+            this.toast.error('Email já cadastrado');
+            this.mensalistas.email = '';
+          }
         );
       } else {
         this.cadastrarBd(this.mensalistas).then(
@@ -134,7 +138,7 @@ export class DialogAddMensalComponent implements OnInit {
             this.toast.success('SUCESSO AO CADASTRAR!');
           },
           (err) => {
-            console.log('failed');
+            console.log('ERRO AO CADASTRAR');
           }
         );
       }

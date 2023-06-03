@@ -1,0 +1,29 @@
+.form {
+  width: auto;
+  margin: auto;
+
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.full-width {
+  width: 30rem;
+  padding: 1rem;
+}
+
+.radiobutton {
+  padding: 10rem;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 2px;
+}
+
+mat-radio-button {
+  padding: 1rem;
+}

@@ -1,0 +1,32 @@
+<form class="form mat-elevation-z2">
+  <img src="assets/img/erfil2.png" /><br /><br />
+  <h1><strong>Nome:</strong> {{ mensalista.nome }}</h1>
+  <br />
+  <h1>
+    <strong>Modelo:</strong> {{ mensalista.modelo }} &nbsp; &nbsp; &nbsp;
+    <strong>Placa:</strong> {{ mensalista.placa }} &nbsp; &nbsp;
+    <strong>Veiculo:</strong>{{ mensalista.veiculo }}
+  </h1>
+  <h1></h1>
+  <h1>
+    <strong>Valor a pagar:</strong> <strong> {{ valorPagar }}</strong>
+  </h1>
+
+  <button
+    (click)="finalizar()"
+    class="full-width mat-elevation-z5"
+    mat-stroked-button
+    color="primary"
+  >
+    FINALIZAR
+  </button>
+
+  <button
+    (click)="dialogClose()"
+    class="full-width mat-elevation-z5"
+    mat-stroked-button
+    color="primary"
+  >
+    CANCELAR
+  </button>
+</form>

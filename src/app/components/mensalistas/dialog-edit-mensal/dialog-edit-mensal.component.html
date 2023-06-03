@@ -1,1 +1,111 @@
-<p>dialog-edit-mensal works!</p>
+<form class="form">
+  <img src="assets/img/logo-minoruOld.png" width="200px" height="100px" />
+
+  <h1>CADASTRO DE MENSALISTAS</h1>
+
+  <br />
+
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Nome</mat-label>
+    <input
+      name="nome"
+      matInput
+      placeholder="Ex. Matheus Andrade"
+      [formControl]="nome"
+      required
+      [(ngModel)]="mensalistas.nome"
+    />
+    <mat-error>Digite o nome com no minimo 3 caracteres</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Placa</mat-label>
+    <input
+      [formControl]="placa"
+      required
+      [(ngModel)]="mensalistas.placa"
+      name="placa"
+      matInput
+      placeholder="Ex. Padrao MERCOSUL/ANTIGOm"
+      mask="SSS-0A00"
+    />
+    <mat-error
+      >Placa no padrao mercosul ou padrao antigo</mat-error
+    > </mat-form-field
+  ><br />
+
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Telefone</mat-label>
+    <input
+      [formControl]="telefone"
+      required
+      [(ngModel)]="mensalistas.tel"
+      name="telefone"
+      matInput
+      placeholder="Ex. (11) 94696-6635"
+      mask="(00)  00000-0000"
+    />
+    <mat-error>Complete o campo corretamente o telefone</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Modelo</mat-label>
+    <input
+      [formControl]="modelo"
+      required
+      [(ngModel)]="mensalistas.modelo"
+      name="modelo"
+      matInput
+      placeholder="Ex. Toyota Corolla"
+    />
+    <mat-error
+      >Digite o modelo do veiculo com no minimo 3 Caracteres</mat-error
+    > </mat-form-field
+  ><br />
+
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Email - (OPCIONAL)</mat-label>
+    <input
+      [formControl]="email"
+      [(ngModel)]="mensalistas.email"
+      name="email"
+      matInput
+      placeholder="Ex. matheus@fatec.com"
+    />
+  </mat-form-field>
+
+  <mat-checkbox
+    [formControl]="checkAcessSistem"
+    [disabled]="mensalistas.acessAccount"
+    >Create Account in System?</mat-checkbox
+  >
+
+  <br />
+
+  <mat-radio-group
+    class="radiobutton"
+    [formControl]="radioButton"
+    required
+    [(ngModel)]="mensalistas.veiculo"
+  >
+    <mat-radio-button value="CARRO">CARRO</mat-radio-button>
+    <mat-radio-button value="MOTO">MOTO</mat-radio-button> </mat-radio-group
+  ><br />
+
+  <button
+    (click)="update()"
+    class="full-width mat-elevation-z5"
+    mat-stroked-button
+    color="primary"
+  >
+    Atualizar
+  </button>
+  <button
+    (click)="dialogClose()"
+    class="full-width mat-elevation-z5"
+    mat-stroked-button
+    color="primary"
+  >
+    CANCELAR
+  </button>
+</form>
