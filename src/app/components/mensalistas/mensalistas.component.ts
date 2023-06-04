@@ -8,7 +8,7 @@ import { GaragemService } from 'src/app/services/garagem.service';
 import { MensalistasService } from 'src/app/services/mensalistas.service';
 import { DialogAddMensalComponent } from './dialog-add-mensal/dialog-add-mensal.component';
 import { DialogEditMensalComponent } from './dialog-edit-mensal/dialog-edit-mensal.component';
-import { DialogFinalizarComponent } from './dialog-finalizar/dialog-finalizar.component';
+import { DialogFinalizarMensalComponent } from './dialog-finalizar-mensal/dialog-finalizar-mensal.component';
 
 @Component({
   selector: 'app-mensalistas',
@@ -51,7 +51,7 @@ export class MensalistasComponent implements OnInit {
     dialogConfig.width = '60%';
     dialogConfig.data = mensalista;
 
-    this.dialog.open(DialogFinalizarComponent, dialogConfig);
+    this.dialog.open(DialogFinalizarMensalComponent, dialogConfig);
   }
 
   openEdit(mensalista: Mensalistas) {

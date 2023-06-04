@@ -13,4 +13,5 @@ export interface Mensalistas {
   tel: string;
   veiculo: string;
   acessAccount: boolean;
+  profileURL: string;
 }

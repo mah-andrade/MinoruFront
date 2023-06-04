@@ -50,6 +50,7 @@ import { DialogEditarComponent } from './components/garagem/dialog-editar/dialog
 import { DialogFinalizarComponent } from './components/garagem/dialog-finalizar/dialog-finalizar.component';
 import { DialogAddMensalComponent } from './components/mensalistas/dialog-add-mensal/dialog-add-mensal.component';
 import { DialogEditMensalComponent } from './components/mensalistas/dialog-edit-mensal/dialog-edit-mensal.component';
+import { DialogFinalizarMensalComponent } from './components/mensalistas/dialog-finalizar-mensal/dialog-finalizar-mensal.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { DialogEditMensalComponent } from './components/mensalistas/dialog-edit-
     DialogFinalizarComponent,
     DialogAddMensalComponent,
     DialogEditMensalComponent,
+    DialogFinalizarMensalComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,11 +114,12 @@ import { DialogEditMensalComponent } from './components/mensalistas/dialog-edit-
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
+    DialogEditMensalComponent,
     DialogAdicionarComponent,
     DialogFinalizarComponent,
     DialogEditarComponent,
     DialogAddMensalComponent,
-    DialogEditMensalComponent,
+    DialogFinalizarMensalComponent,
   ],
 })
 export class AppModule {}

@@ -15,6 +15,7 @@ import {
   deleteDoc,
   getFirestore,
   setDoc,
+  CollectionReference,
 } from '@angular/fire/firestore';
 import { Garagem } from '../models/garagem';
 import { Observable } from 'rxjs';
@@ -130,5 +131,15 @@ export class GaragemService {
     const querySnapshot = await getDocs(q);
 
     return querySnapshot.size;
+  }
+  updateAddMensal(Obj: Object) {
+    var data = new Date();
+    const db = getFirestore();
+    var docRef = doc(
+      db,
+      'Mensal',
+      data.getMonth() + 1 + data.getFullYear().toString()
+    );
+    return setDoc(docRef, Obj);
   }
 }

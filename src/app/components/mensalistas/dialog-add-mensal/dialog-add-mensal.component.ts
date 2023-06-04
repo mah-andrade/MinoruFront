@@ -28,6 +28,7 @@ export class DialogAddMensalComponent implements OnInit {
     tel: '',
     veiculo: '',
     acessAccount: false,
+    profileURL: '',
   };
 
   valorCar: number;
@@ -92,22 +93,20 @@ export class DialogAddMensalComponent implements OnInit {
     } else {
       let dataAtual = new Date();
 
-      this.mensalistas.InicioContrato =
-        dataAtual.getDate() +
-        '/' +
-        (dataAtual.getMonth() + 1) +
-        '/' +
-        dataAtual.getFullYear();
+      this.mensalistas.InicioContrato = this.formatDate(
+        dataAtual.getDate(),
+        dataAtual.getMonth() + 1,
+        dataAtual.getFullYear()
+      ).toString();
 
       let dataVencimento = new Date();
       let dataAtualizada = this.addDays(dataVencimento, 30);
 
-      this.mensalistas.VencimentoContrato =
-        dataAtualizada.getDate() +
-        '/' +
-        (dataAtualizada.getMonth() + 1) +
-        '/' +
-        dataAtualizada.getFullYear();
+      this.mensalistas.VencimentoContrato = this.formatDate(
+        dataAtualizada.getDate(),
+        dataAtualizada.getMonth() + 1,
+        dataAtualizada.getFullYear()
+      ).toString();
 
       this.mensalistas.contrato = true;
 
@@ -261,5 +260,21 @@ export class DialogAddMensalComponent implements OnInit {
 
   validEmail(email) {
     return /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
+  }
+
+  formatDate(dia: number, mes: number, ano: number): String {
+    var diaFim, meFim, anoFim;
+    if (dia < 10) {
+      diaFim = '0' + dia;
+    } else {
+      diaFim = dia;
+    }
+    if (mes < 10) {
+      meFim = '0' + mes;
+    } else {
+      meFim = mes;
+    }
+
+    return diaFim + '/' + meFim + '/' + ano;
   }
 }

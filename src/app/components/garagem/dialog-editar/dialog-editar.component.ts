@@ -26,6 +26,7 @@ export class DialogEditarComponent implements OnInit {
 
   dataFormat: string;
   valorPagar: number;
+  mostrarValor: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -89,6 +90,7 @@ export class DialogEditarComponent implements OnInit {
         } else {
           this.valorPagar = diario;
         }
+        this.mostrarValor = this.formatNumber(this.valorPagar);
       } else {
         var hour = this.garagem.horaInicial.split(':');
         var minInicial = this.converteMin(hour[0], hour[1]);
@@ -118,6 +120,7 @@ export class DialogEditarComponent implements OnInit {
             this.valorPagar = avulso;
           }
         }
+        this.mostrarValor = this.formatNumber(this.valorPagar);
       }
     });
   }
@@ -132,25 +135,48 @@ export class DialogEditarComponent implements OnInit {
 
   finalizar(valor: any) {
     // salvar os valores
-
+    this.garagem.status = 'FINALIZADO';
     let obj: Object;
 
     this.garagemservice.returnMensal().then((dados) => {
       obj = dados;
+      var auxCliente = dados['totalClientes'];
+      var auxClienteCar;
       var aux = dados['valorRendimento'];
       aux += valor;
       obj['valorRendimento'] = aux;
-      this.garagemservice.updateRendimento(obj).then(
+      if (this.garagem.veiculo === 'CARRO') {
+        auxClienteCar = dados['carCli'];
+      } else {
+        auxClienteCar = dados['motoCli'];
+      }
+      auxClienteCar += 1;
+      auxCliente += 1;
+      obj['totalClientes'] = auxCliente;
+      if (this.garagem.veiculo === 'CARRO') {
+        obj['carCli'] = auxClienteCar;
+      } else {
+        obj['motoCli'] = auxClienteCar;
+      }
+      this.garagemservice.updateAddMensal(obj).then(
         (sucess) => {
-          this.garagem.status = 'FINALIZADO';
           this.garagemservice.updateCar(this.garagem);
+          this.toast.success('Adicionado com sucesso!');
           this.dialogRef.close();
-          this.toast.success('Finalizado com Sucesso');
         },
         (err) => {
           this.toast.error('ERRO');
         }
       );
     });
+  }
+
+  formatNumber(dados: Number): string {
+    const formatter = dados.toLocaleString('pt-br', {
+      currency: 'BRL',
+      style: 'currency',
+      minimumFractionDigits: 2,
+    });
+    return formatter;
   }
 }
