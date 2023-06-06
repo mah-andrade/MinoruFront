@@ -19,9 +19,11 @@ export class DialogEditarComponent implements OnInit {
     cliente: '',
     horaInicial: '',
     placa: '',
-    status: '',
-    lavagem: '',
+    status: false,
+    lavagem: false,
     statusLavagem: '',
+    valor: 0,
+    ordemLavagem: 0,
   };
 
   dataFormat: string;
@@ -47,7 +49,7 @@ export class DialogEditarComponent implements OnInit {
     this.garagem.lavagem = this.data.lavagem;
     this.garagem.statusLavagem = this.data.statusLavagem;
     this.garagem.status = this.data.status;
-
+    this.garagem.valor = 0;
     this.calcularValor();
 
     var dataAtual = new Date();
@@ -85,7 +87,7 @@ export class DialogEditarComponent implements OnInit {
       avulso = valoresEst['avulso'];
 
       if (this.garagem.cliente === 'DIARIO') {
-        if (this.garagem.lavagem === 'LAVAGEM') {
+        if (this.garagem.lavagem) {
           this.valorPagar = diario + lavagem;
         } else {
           this.valorPagar = diario;
@@ -101,7 +103,7 @@ export class DialogEditarComponent implements OnInit {
         );
 
         if (minFinal - minInicial >= 60) {
-          if (this.garagem.lavagem === 'LAVAGEM') {
+          if (this.garagem.lavagem) {
             var hours = Math.floor((minFinal - minInicial) / 60);
 
             if (hours == 1) {
@@ -114,7 +116,7 @@ export class DialogEditarComponent implements OnInit {
             this.valorPagar = avulso * (hours + 1);
           }
         } else {
-          if (this.garagem.lavagem === 'LAVAGEM') {
+          if (this.garagem.lavagem) {
             this.valorPagar = avulso + lavagem;
           } else {
             this.valorPagar = avulso;
@@ -135,9 +137,10 @@ export class DialogEditarComponent implements OnInit {
 
   finalizar(valor: any) {
     // salvar os valores
-    this.garagem.status = 'FINALIZADO';
-    let obj: Object;
 
+    this.garagem.status = false;
+    let obj: Object;
+    this.garagem.valor = valor;
     this.garagemservice.returnMensal().then((dados) => {
       obj = dados;
       var auxCliente = dados['totalClientes'];

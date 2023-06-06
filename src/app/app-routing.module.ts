@@ -5,7 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
 import { GaragemComponent } from './components/garagem/garagem.component';
 import { MensalistasComponent } from './components/mensalistas/mensalistas.component';
-import { SobreComponent } from './components/sobre/sobre.component';
+
 import {
   AuthGuard,
   redirectUnauthorizedTo,
@@ -36,7 +36,6 @@ const routes: Routes = [
         component: GaragemComponent,
       },
       { path: 'mensalistas', component: MensalistasComponent },
-      { path: 'sobre', component: SobreComponent },
     ],
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectUnauthorizedTo },

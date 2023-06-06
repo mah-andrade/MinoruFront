@@ -12,7 +12,7 @@ export const environment = {
     authDomain: 'minoru-fe017.firebaseapp.com',
     messagingSenderId: '929592114740',
   },
-  production: false
+  production: false,
 };
 
 /*

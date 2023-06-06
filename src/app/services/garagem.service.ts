@@ -32,7 +32,7 @@ export class GaragemService {
 
   getAllCars(): Observable<Garagem[]> {
     return collectionData(
-      query(this.getCollection(), where('status', '==', 'ATIVO')),
+      query(this.getCollection(), where('status', '==', true)),
       {
         idField: 'id',
       }
@@ -47,6 +47,25 @@ export class GaragemService {
       this.dataAtual()
     );
     return vecRef;
+  }
+
+  addOrdem(Obj: Object) {
+    const db = getFirestore();
+    const docRef = doc(db, 'Veiculo/DIAS/' + this.dataAtual(), 'ORDEMBY');
+    return setDoc(docRef, Obj);
+  }
+
+  async returnOrdemBt() {
+    const db = getFirestore();
+    var docRef;
+
+    docRef = doc(db, 'Veiculo/DIAS/' + this.dataAtual(), 'ORDEMBY');
+
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
+    }
   }
 
   updateCar(garagem: Garagem) {

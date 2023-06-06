@@ -32,7 +32,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { HomeComponent } from './components/home/home.component';
@@ -41,7 +41,6 @@ import { NavComponent } from './components/nav/nav.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { GaragemComponent } from './components/garagem/garagem.component';
 import { MensalistasComponent } from './components/mensalistas/mensalistas.component';
-import { SobreComponent } from './components/sobre/sobre.component';
 
 import { DialogAdicionarComponent } from './components/garagem/dialog-adicionar/dialog-adicionar.component';
 
@@ -61,7 +60,6 @@ import { DialogFinalizarMensalComponent } from './components/mensalistas/dialog-
     MenuComponent,
     GaragemComponent,
     MensalistasComponent,
-    SobreComponent,
     DialogAdicionarComponent,
     DialogEditarComponent,
     DialogFinalizarComponent,

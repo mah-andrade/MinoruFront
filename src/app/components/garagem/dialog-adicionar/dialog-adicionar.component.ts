@@ -19,9 +19,11 @@ export class DialogAdicionarComponent implements OnInit {
     cliente: '',
     horaInicial: '',
     placa: '',
-    status: '',
-    lavagem: '',
+    status: false,
+    lavagem: false,
     statusLavagem: '',
+    valor: 0,
+    ordemLavagem: 0,
   };
 
   nome = new FormControl(null, Validators.minLength(3));
@@ -57,12 +59,52 @@ export class DialogAdicionarComponent implements OnInit {
     }
 
     if (this.checkLavagem.valid) {
-      this.garagem.lavagem = 'LAVAGEM';
+      this.garagem.lavagem = true;
       this.garagem.statusLavagem = 'PENDENTE';
+
+      this.garagemService.returnOrdemBt().then((suc) => {
+        if (suc != null) {
+          //ADICIONANDO NO DOCUMENTO E SOMANDO 1
+          let obj = {
+            ordem: 0,
+          };
+          var aux = suc['ordem'];
+          this.garagem.ordemLavagem = aux + 1;
+          obj.ordem = aux + 1;
+          this.garagemService.addOrdem(obj).then(
+            (suc) => {},
+            (er) => {}
+          );
+        } else {
+          //CRIANDO DOCUMENTO SETANDO VALOR 1
+          let obj = {
+            ordem: 1,
+          };
+          this.garagem.ordemLavagem = 1;
+          this.garagemService.addOrdem(obj).then(
+            (suc) => {},
+            (er) => {}
+          );
+        }
+        /*let obj = {
+            ordem: 0,
+          };
+          var aux = suc['ordem'];
+          console.log('valor  de aux');
+          obj.ordem = aux + 1;
+          this.garagemService.addOrdem(obj).then(
+            (suc) => {
+              console.log('sucess');
+            },
+            (er) => {
+              console.log('error');
+            }
+          );*/
+      });
     }
 
     this.garagem.horaInicial = hour + ':' + min;
-    this.garagem.status = 'ATIVO';
+    this.garagem.status = true;
     this.garagem.placa = this.garagem.placa.toUpperCase();
     this.dialogRef.close();
 

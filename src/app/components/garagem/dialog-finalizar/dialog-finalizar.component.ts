@@ -20,9 +20,11 @@ export class DialogFinalizarComponent implements OnInit {
     cliente: '',
     horaInicial: '',
     placa: '',
-    status: '',
-    lavagem: '',
+    status: false,
+    lavagem: false,
     statusLavagem: '',
+    valor: 0,
+    ordemLavagem: 0,
   };
 
   nome = new FormControl(null, Validators.minLength(3));
