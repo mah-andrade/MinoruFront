@@ -21,6 +21,7 @@ export class DialogFinalizarMensalComponent implements OnInit {
   valorPagarAux: number;
   valorPagar: string;
   mensalista: Mensalistas;
+  valorDescontoAux: string;
 
   ngOnInit(): void {
     this.mensalista = this.data;
@@ -80,8 +81,16 @@ export class DialogFinalizarMensalComponent implements OnInit {
     let valorMensal;
     this.garagem.returnDocument(this.mensalista.veiculo).then(
       (dados) => {
-        this.valorPagarAux = dados['mensal'];
-        this.valorPagar = this.formatNumber(dados['mensal']);
+        var auxMoney = dados['mensal'];
+        var desconto = auxMoney * 0.08;
+
+        if (this.mensalista.convenio) {
+          this.valorDescontoAux = this.formatNumber(desconto);
+          this.valorPagar = this.formatNumber(auxMoney - desconto);
+        } else {
+          this.valorDescontoAux = 'Nao tem desconto';
+          this.valorPagar = this.formatNumber(auxMoney);
+        }
       },
       (err) => {}
     );

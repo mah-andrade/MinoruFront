@@ -23,6 +23,7 @@ export class DialogEditMensalComponent implements OnInit {
   email = new FormControl(null, Validators.email);
 
   checkAcessSistem = new FormControl(null, Validators.required);
+  checkConvenio = new FormControl(null, Validators.required);
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<DialogEditMensalComponent>,
@@ -66,5 +67,39 @@ export class DialogEditMensalComponent implements OnInit {
 
   validEmail(email) {
     return /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
+  }
+
+  validaCampos(): boolean {
+    if (
+      this.nome.valid &&
+      this.telefone.valid &&
+      this.modelo.valid &&
+      this.placa.valid &&
+      this.checkButton.valid &&
+      this.radioButton.valid &&
+      this.dataNascimento.valid &&
+      this.cpf.valid &&
+      this.endereco.valid
+    ) {
+      if (
+        this.mensalistas.nome.trim().length >= 3 &&
+        this.mensalistas.modelo.trim().length >= 3 &&
+        this.mensalistas.endereco.trim().length >= 3
+      ) {
+        if (this.validaEmail()) {
+          if (this.email.valid) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 }

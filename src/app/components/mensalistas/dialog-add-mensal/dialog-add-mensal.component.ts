@@ -29,6 +29,7 @@ export class DialogAddMensalComponent implements OnInit {
     veiculo: '',
     acessAccount: false,
     profileURL: '',
+    convenio: false,
   };
 
   valorCar: number;
@@ -49,6 +50,7 @@ export class DialogAddMensalComponent implements OnInit {
 
   //check checkbox
   checkAcessSistem = new FormControl(null, Validators.required);
+  checkConvenio = new FormControl(null, Validators.required);
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddMensalComponent>,
@@ -109,6 +111,10 @@ export class DialogAddMensalComponent implements OnInit {
       ).toString();
 
       this.mensalistas.contrato = true;
+
+      if (this.checkConvenio.valid) {
+        this.mensalistas.convenio = true;
+      }
 
       if (this.checkAcessSistem.valid) {
         const auth = getAuth();

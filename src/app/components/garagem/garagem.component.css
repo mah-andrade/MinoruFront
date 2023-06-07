@@ -32,7 +32,8 @@
 }
 
 .mat-header-cell {
-  color: red;
+  color: #002b5c;
+
   width: 100%;
 }
 
@@ -80,6 +81,10 @@
 }
 .div2 table {
   width: 100%;
+}
+h2 {
+  font-size: 40px;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .material-icons {

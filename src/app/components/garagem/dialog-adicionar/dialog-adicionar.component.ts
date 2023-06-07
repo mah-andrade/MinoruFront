@@ -24,6 +24,7 @@ export class DialogAdicionarComponent implements OnInit {
     statusLavagem: '',
     valor: 0,
     ordemLavagem: 0,
+    convenio: false,
   };
 
   nome = new FormControl(null, Validators.minLength(3));
@@ -33,6 +34,7 @@ export class DialogAdicionarComponent implements OnInit {
   checkButton = new FormControl(null);
   radioButton = new FormControl(null);
   checkLavagem = new FormControl(null, Validators.required);
+  checkConvenio = new FormControl(null, Validators.required);
 
   constructor(
     private garagemService: GaragemService,
@@ -56,6 +58,9 @@ export class DialogAdicionarComponent implements OnInit {
       min = '0' + horaAtual.getMinutes();
     } else {
       min = horaAtual.getMinutes();
+    }
+    if (this.checkConvenio.valid) {
+      this.garagem.convenio = true;
     }
 
     if (this.checkLavagem.valid) {

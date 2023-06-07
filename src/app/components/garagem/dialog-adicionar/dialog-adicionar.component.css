@@ -1,16 +1,101 @@
-.form {
-  width: auto;
+.container2 {
+  width: 640px;
+  height: 700px;
+
   margin: auto;
-  background-color: rgb(235, 235, 235);
-  padding: 4rem 1rem;
-  border-radius: 1rem;
+  display: flex;
   align-items: center;
-  text-align: center;
+
+  /* X  ------------- */
+  justify-content: center;
+  flex-direction: column;
+  /* Y  | */
+  /* align-items: center;*/
+}
+.child {
+  display: flex;
+  width: 100%;
+  height: 20%;
   justify-content: center;
 }
+.child img {
+  align-items: center;
+}
+
+.child2 {
+  width: 95%;
+  height: 100px;
+  display: flex;
+
+  justify-content: center;
+  flex-direction: column;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center;*/
+}
+.child2 h4 {
+  text-align: center;
+  font-size: 16px;
+}
+.campo {
+  display: flex;
+
+  justify-content: center;
+}
+mat-checkbox {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+mat-button-toggle-group {
+  height: 40px;
+  font-size: 14px;
+}
+.child1 {
+  width: 110%;
+  height: 24%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.childSelect {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.childSelectButton {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.campos {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.filhos {
+  width: 100%;
+  height: 30px;
+
+  margin-top: 30px;
+}
+
 .full-width {
-  width: 30rem;
-  padding: 1rem;
+  width: 95%;
+  padding: 5px;
 }
 
 .radiobutton {
@@ -24,4 +109,19 @@
   width: 25px;
   background-color: #eee;
   border-radius: 2px;
+}
+
+.mat-checkbox {
+  text-align: center;
+}
+mat-radio-button {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.childSelectButton button {
+  width: 220px;
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 84%;
 }

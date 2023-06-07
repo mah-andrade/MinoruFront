@@ -1,103 +1,126 @@
-<form class="form mat-elevation-z2">
-  <img src="assets/img/logo-minoruOld.png" />
+<div class="container2">
+  <div class="child">
+    <img src="assets/img/logo-minoruOld.png" />
+  </div>
+  <div class="child2">
+    <h4>SELECIONE O TIPO DE SERVIÇO:</h4>
+    <div class="campo">
+      <mat-button-toggle-group
+        [formControl]="checkButton"
+        required
+        name="selectEstaci"
+        [(ngModel)]="garagem.cliente"
+      >
+        <mat-button-toggle value="AVULSO">AVULSO</mat-button-toggle>
 
-  <h1>SELECIONE O TIPO DE SERVIÇO</h1>
+        <mat-button-toggle value="DIARIO">DIARIO</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <div class="child1">
+    <div class="campos">
+      <div class="filhos">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Nome</mat-label>
 
-  <mat-button-toggle-group
-    [formControl]="checkButton"
-    required
-    name="selectEstaci"
-    [(ngModel)]="garagem.cliente"
-  >
-    <mat-button-toggle value="AVULSO">AVULSO</mat-button-toggle>
-    <mat-button-toggle value="DIARIO"
-      >DIARIO</mat-button-toggle
-    > </mat-button-toggle-group
-  ><br />
+          <input
+            [formControl]="nome"
+            required
+            [(ngModel)]="garagem.nome"
+            name="nome"
+            matInput
+            placeholder="Ex. Matheus Andrade"
+          />
+        </mat-form-field>
+      </div>
+      <div class="filhos">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Telefone</mat-label>
 
-  <mat-form-field class="full-width" appearance="fill">
-    <mat-label>Nome</mat-label>
-    <input
-      [formControl]="nome"
+          <input
+            [formControl]="telefone"
+            required
+            [(ngModel)]="garagem.telefone"
+            name="telefone"
+            matInput
+            placeholder="Ex. (11) 94666635"
+            mask="(00)  00000-0000"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="campos">
+      <div class="filhos">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Modelo</mat-label>
+
+          <input
+            [formControl]="modelo"
+            required
+            [(ngModel)]="garagem.modelo"
+            name="modelo"
+            matInput
+            placeholder="Ex. Toyota Corolla"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="filhos">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Placa</mat-label>
+
+          <input
+            [formControl]="placa"
+            required
+            [(ngModel)]="garagem.placa"
+            name="placa"
+            matInput
+            placeholder="Ex. Padrao MERCOSUL/ANTIGOm"
+            mask="SSS-0A00"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="childSelect">
+    <mat-radio-group
+      class="radiobutton"
+      [formControl]="radioButton"
       required
-      [(ngModel)]="garagem.nome"
-      name="nome"
-      matInput
-      placeholder="Ex. Matheus Andrade"
-    />
-  </mat-form-field>
-
-  <mat-form-field class="full-width" appearance="fill">
-    <mat-label>Placa</mat-label>
-    <input
-      [formControl]="placa"
+      [(ngModel)]="garagem.veiculo"
       required
-      [(ngModel)]="garagem.placa"
-      name="placa"
-      matInput
-      placeholder="Ex. Padrao MERCOSUL/ANTIGOm"
-      mask="SSS-0A00"
-    /> </mat-form-field
-  ><br />
-
-  <mat-form-field class="full-width" appearance="fill">
-    <mat-label>Telefone</mat-label>
-    <input
-      [formControl]="telefone"
-      required
-      [(ngModel)]="garagem.telefone"
-      name="telefone"
-      matInput
-      placeholder="Ex. (11) 94666635"
-      mask="(00)  00000-0000"
-    />
-  </mat-form-field>
-
-  <mat-form-field class="full-width" appearance="fill">
-    <mat-label>Modelo</mat-label>
-    <input
-      [formControl]="modelo"
-      required
-      [(ngModel)]="garagem.modelo"
-      name="modelo"
-      matInput
-      placeholder="Ex. Toyota Corolla"
-    /> </mat-form-field
-  ><br />
-
-  <mat-radio-group
-    class="radiobutton"
-    [formControl]="radioButton"
-    required
-    [(ngModel)]="garagem.veiculo"
-    required
-  >
-    <mat-radio-button value="CARRO" true>CARRO</mat-radio-button>
-    <mat-radio-button value="MOTO">MOTO</mat-radio-button> </mat-radio-group
-  ><br /><br />
-
-  <section>
-    <mat-checkbox [formControl]="checkLavagem"
-      >Deseja realizar lavagem no veiculo!</mat-checkbox
     >
-  </section>
-  <br />
+      <mat-radio-button value="CARRO" true>CARRO</mat-radio-button>
 
-  <button
-    (click)="cadastrar()"
-    class="full-width mat-elevation-z5"
-    mat-stroked-button
-    color="primary"
-    [disabled]="!validaCampos()"
-  >
-    CADASTRAR
-  </button>
-  <button
-    (click)="dialogClose()"
-    class="full-width mat-elevation-z5"
-    mat-stroked-button
-    color="primary"
-  >
-    CANCELAR
-  </button>
-</form>
+      <mat-radio-button value="MOTO">MOTO</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="childSelect">
+    <section>
+      <mat-checkbox [formControl]="checkLavagem">Lavagem</mat-checkbox
+      ><mat-checkbox [formControl]="checkConvenio"
+        >Convenio Hospitalar</mat-checkbox
+      >
+    </section>
+  </div>
+  <div class="childSelectButton">
+    <button
+      (click)="dialogClose()"
+      class="full-width mat-elevation-z5"
+      mat-raised-button
+      color="warn"
+    >
+      CANCELAR
+    </button>
+
+    <button
+      (click)="cadastrar()"
+      class="full-width mat-elevation-z5"
+      mat-raised-button
+      color="primary"
+      [disabled]="!validaCampos()"
+    >
+      CADASTRAR
+    </button>
+  </div>
+</div>

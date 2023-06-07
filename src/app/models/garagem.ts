@@ -12,4 +12,5 @@ export interface Garagem {
   statusLavagem: string;
   valor: number;
   ordemLavagem: number;
+  convenio: boolean;
 }

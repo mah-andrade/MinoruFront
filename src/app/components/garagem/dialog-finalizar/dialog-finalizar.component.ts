@@ -25,6 +25,7 @@ export class DialogFinalizarComponent implements OnInit {
     statusLavagem: '',
     valor: 0,
     ordemLavagem: 0,
+    convenio: false,
   };
 
   nome = new FormControl(null, Validators.minLength(3));
@@ -34,7 +35,7 @@ export class DialogFinalizarComponent implements OnInit {
   checkButton = new FormControl(null);
   radioButton = new FormControl(null);
   checkLavagem = new FormControl(null);
-
+  checkConvenio = new FormControl(null);
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<DialogFinalizarComponent>,
@@ -54,6 +55,7 @@ export class DialogFinalizarComponent implements OnInit {
     this.garagem.lavagem = this.data.lavagem;
     this.garagem.statusLavagem = this.data.statusLavagem;
     this.garagem.status = this.data.status;
+    this.garagem.convenio = this.data.convenio;
   }
 
   update() {
@@ -127,7 +129,15 @@ export class DialogFinalizarComponent implements OnInit {
   }
 
   validaLavagem(): boolean {
-    if (this.data.lavagem === 'LAVAGEM') {
+    if (this.garagem.lavagem) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  validaConvenio(): boolean {
+    if (this.garagem.convenio) {
       return true;
     } else {
       return false;

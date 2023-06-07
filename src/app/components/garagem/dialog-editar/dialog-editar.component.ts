@@ -24,8 +24,10 @@ export class DialogEditarComponent implements OnInit {
     statusLavagem: '',
     valor: 0,
     ordemLavagem: 0,
+    convenio: false,
   };
 
+  descontoAux: String;
   dataFormat: string;
   valorPagar: number;
   mostrarValor: string;
@@ -50,6 +52,7 @@ export class DialogEditarComponent implements OnInit {
     this.garagem.statusLavagem = this.data.statusLavagem;
     this.garagem.status = this.data.status;
     this.garagem.valor = 0;
+    this.garagem.convenio = this.data.convenio;
     this.calcularValor();
 
     var dataAtual = new Date();
@@ -77,7 +80,8 @@ export class DialogEditarComponent implements OnInit {
     let avulso = 0;
     let lavagem = 0;
     let diario = 0;
-
+    this.descontoAux = 'Nao tem direito';
+    console.log(this.garagem.convenio);
     //PEGANDO O DOCUMENTO DO BD
     let valoresEst: Object;
     this.garagemservice.returnDocument(this.garagem.veiculo).then((dados) => {
@@ -92,6 +96,13 @@ export class DialogEditarComponent implements OnInit {
         } else {
           this.valorPagar = diario;
         }
+
+        if (this.garagem.convenio) {
+          var desconto = this.valorPagar * 0.08;
+          this.descontoAux = this.formatNumber(desconto);
+          this.valorPagar = this.valorPagar - desconto;
+        }
+
         this.mostrarValor = this.formatNumber(this.valorPagar);
       } else {
         var hour = this.garagem.horaInicial.split(':');
@@ -121,6 +132,12 @@ export class DialogEditarComponent implements OnInit {
           } else {
             this.valorPagar = avulso;
           }
+        }
+
+        if (this.garagem.convenio) {
+          var desconto = this.valorPagar * 0.08;
+          this.descontoAux = this.formatNumber(desconto);
+          this.valorPagar = this.valorPagar - desconto;
         }
         this.mostrarValor = this.formatNumber(this.valorPagar);
       }

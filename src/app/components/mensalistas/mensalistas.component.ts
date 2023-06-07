@@ -63,4 +63,8 @@ export class MensalistasComponent implements OnInit {
 
     this.dialog.open(DialogEditMensalComponent, dialogConfig);
   }
+
+  filterData($event: any) {
+    this.dataSource.filter = $event.target.value;
+  }
 }

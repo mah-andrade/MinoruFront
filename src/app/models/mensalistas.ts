@@ -14,4 +14,5 @@ export interface Mensalistas {
   veiculo: string;
   acessAccount: boolean;
   profileURL: string;
+  convenio: boolean;
 }

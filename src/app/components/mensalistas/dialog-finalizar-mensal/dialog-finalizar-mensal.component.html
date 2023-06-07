@@ -1,22 +1,68 @@
-<form class="form">
-  <img src="assets/img/erfil2.png" /><br /><br />
-  <h1><strong>Nome:</strong> {{ mensalista.nome }}</h1>
-  <br />
-  <h1>
-    <strong>Modelo:</strong> {{ mensalista.modelo }} &nbsp; &nbsp; &nbsp;
-    <strong>Placa:</strong> {{ mensalista.placa }} &nbsp; &nbsp;
-    <strong>Veiculo:</strong>{{ mensalista.veiculo }}
-  </h1>
-  <h1></h1>
-  <h1>
-    <strong>Valor a pagar:</strong> <strong> {{ valorPagar }}</strong>
-  </h1>
-  <section>
-    <button mat-raised-button color="primary" (click)="renovar(mensalista)">
-      RENOVAR
-    </button>
-    <button mat-raised-button color="accent" (click)="dialogClose()">
+<div class="container">
+  <div class="childs">
+    <img src="assets/img/perfilAtt.png" />
+  </div>
+  <div class="child1">
+    <div class="campos">
+      <div class="linhas">
+        <h4 class="CAMPOS">NOME:&nbsp;</h4>
+        <p>{{ mensalista.nome }}</p>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">Modelo:&nbsp;</h4>
+        <p>{{ mensalista.modelo }}</p>
+      </div>
+      <div class="linhas">
+        <div class="linhas">
+          <h4 class="CAMPOS">Cliente com Desconto:&nbsp;</h4>
+          <p>{{ mensalista.convenio }}</p>
+        </div>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">Valor do desconto:</h4>
+        <p>{{ valorDescontoAux }}</p>
+      </div>
+    </div>
+    <div class="campos">
+      <div class="linhas">
+        <h4 class="CAMPOS">STATUS:&nbsp;</h4>
+        <p>{{ mensalista.contrato }}</p>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">PLACA:&nbsp;</h4>
+        <p>{{ mensalista.placa }}</p>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">Veiculo:&nbsp;</h4>
+        <p>{{ mensalista.veiculo }}</p>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">Vencimento:&nbsp;</h4>
+        <p>{{ mensalista.VencimentoContrato }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="valor">
+    <h4 class="CAMPOS">Valor a pagar:&nbsp;</h4>
+    <p>{{ valorPagar }}</p>
+  </div>
+  <div class="final">
+    <button
+      (click)="dialogClose()"
+      class="full-width mat-elevation-z5"
+      mat-raised-button
+      color="warn"
+    >
       CANCELAR
     </button>
-  </section>
-</form>
+
+    <button
+      (click)="renovar(mensalista)"
+      class="full-width mat-elevation-z5"
+      mat-raised-button
+      color="primary"
+    >
+      RENOVAR
+    </button>
+  </div>
+</div>

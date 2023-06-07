@@ -1,35 +1,72 @@
-<form class="form mat-elevation-z2">
-  <img src="assets/img/erfil2.png" /><br /><br />
-  <h1><strong>Nome:</strong> {{ garagem.nome }}</h1>
-  <br />
-  <h1>
-    <strong>Modelo:</strong> {{ garagem.modelo }} &nbsp; &nbsp; &nbsp;
-    <strong>Placa:</strong> {{ garagem.placa }} &nbsp; &nbsp;
-    <strong>Veiculo:</strong>{{ garagem.veiculo }}
-  </h1>
-  <h1>
-    <strong>Horario de entrada:</strong> {{ garagem.horaInicial }} &nbsp; &nbsp;
-    &nbsp; <strong>Horario de saida:</strong> {{ dataFormat }}
-  </h1>
-  <h1>
-    <strong>Valor a pagar:</strong> <strong> {{ mostrarValor }}</strong>
-  </h1>
+<div class="container">
+  <div class="childs">
+    <img src="assets/img/perfilAtt.png" />
+  </div>
+  <div class="child1">
+    <div class="campos">
+      <div class="linhas">
+        <h4 class="CAMPOS">NOME:&nbsp;</h4>
+        <p>{{ garagem.nome }}</p>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">Modelo:&nbsp;</h4>
+        <p>{{ garagem.modelo }}</p>
+      </div>
+      <div class="linhas">
+        <div class="linhas">
+          <h4 class="CAMPOS">Cliente com Desconto:&nbsp;</h4>
+          <p>{{ garagem.convenio }}</p>
+        </div>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">Hora Inicial:&nbsp;</h4>
+        <p>{{ garagem.horaInicial }}</p>
+      </div>
+    </div>
+    <div class="campos">
+      <div class="linhas">
+        <h4 class="CAMPOS">TIPO:&nbsp;</h4>
+        <p>{{ garagem.cliente }}</p>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">PLACA:&nbsp;</h4>
+        <p>{{ garagem.placa }}</p>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">Veiculo:&nbsp;</h4>
+        <p>{{ garagem.veiculo }}</p>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">Horario de saida:&nbsp;</h4>
+        <p>{{ dataFormat }}</p>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">Valor do desconto:</h4>
+        <p>{{ descontoAux }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="valor">
+    <h4 class="CAMPOS">Valor a pagar:&nbsp;</h4>
+    <p>{{ mostrarValor }}</p>
+  </div>
+  <div class="final">
+    <button
+      (click)="dialogClose()"
+      class="full-width mat-elevation-z5"
+      mat-raised-button
+      color="warn"
+    >
+      CANCELAR
+    </button>
 
-  <button
-    (click)="finalizar(valorPagar)"
-    class="full-width mat-elevation-z5"
-    mat-stroked-button
-    color="primary"
-  >
-    FINALIZAR
-  </button>
-
-  <button
-    (click)="dialogClose()"
-    class="full-width mat-elevation-z5"
-    mat-stroked-button
-    color="primary"
-  >
-    CANCELAR
-  </button>
-</form>
+    <button
+      (click)="finalizar(valorPagar)"
+      class="full-width mat-elevation-z5"
+      mat-raised-button
+      color="primary"
+    >
+      FINALIZAR
+    </button>
+  </div>
+</div>
