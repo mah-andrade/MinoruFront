@@ -53,6 +53,9 @@ export class GaragemComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+  filterData($event: any) {
+    this.dataSource.filter = $event.target.value;
+  }
 
   editUser(garagem: Garagem) {
     const dialogConfig = new MatDialogConfig();

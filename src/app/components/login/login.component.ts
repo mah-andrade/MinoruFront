@@ -37,14 +37,25 @@ export class LoginComponent implements OnInit {
   }
 
   logar() {
-    this.authService.login(this.creds.email, this.creds.senha).subscribe(
-      () => {
-        this.router.navigate(['home']);
-      },
-      (err) => {
-        this.toast.error('Usuário e/ou senha inválidos!', 'Login');
-        this.creds.senha = '';
-      }
-    );
+    if (
+      this.creds.email === 'minoruweb@gmail.com' &&
+      this.creds.senha === '123123'
+    ) {
+      this.authService.login(this.creds.email, this.creds.senha).subscribe(
+        () => {
+          this.router.navigate(['home']);
+        },
+        (err) => {
+          this.toast.error('Usuário e/ou senha inválidos!', 'Login');
+          this.creds.senha = '';
+        }
+      );
+    } else {
+      this.toast.error(
+        'Usuário e/ou senha inválidos! ou Sem permissao',
+        'Login'
+      );
+      this.creds.senha = '';
+    }
   }
 }
