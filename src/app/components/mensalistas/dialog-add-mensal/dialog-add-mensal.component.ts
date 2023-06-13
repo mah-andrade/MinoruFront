@@ -80,6 +80,19 @@ export class DialogAddMensalComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  isValidDate(date: string): boolean {
+    let resultado = date.split('/');
+    let dia = Number(resultado[0]);
+    let mes = Number(resultado[1]);
+    let ano = Number(resultado[2]);
+
+    if (mes > 12 || mes <= 0 || dia > 31 || dia <= 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   cadastrar() {
     let email = this.mensalistas.cpf;
     email = email.replace('.', '');
@@ -92,6 +105,9 @@ export class DialogAddMensalComponent implements OnInit {
     } else if (this.getIdade(this.mensalistas.dataNascimento)) {
       this.mensalistas.dataNascimento = '';
       this.toast.error('ERRO: Menor de 18 anos ou ano superior a 2023');
+    } else if (this.isValidDate(this.mensalistas.dataNascimento)) {
+      this.mensalistas.dataNascimento = '';
+      this.toast.error('ERRO: Data invalida');
     } else {
       let dataAtual = new Date();
 
@@ -160,6 +176,11 @@ export class DialogAddMensalComponent implements OnInit {
 
   getIdade(data: string): boolean {
     let dataformat = data.split('/');
+
+    if (parseInt(dataformat[1]) >= 12 && parseInt(dataformat[1]) <= 0) {
+      return false;
+    }
+
     let dataAtual = new Date();
     let dataNascimento18 = new Date(
       parseInt(dataformat[2]) + 18,

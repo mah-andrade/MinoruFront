@@ -22,10 +22,16 @@ export class DialogFinalizarMensalComponent implements OnInit {
   valorPagar: string;
   mensalista: Mensalistas;
   valorDescontoAux: string;
+  exibeStatus: string;
 
   ngOnInit(): void {
     this.mensalista = this.data;
     this.calculaValor();
+    if (this.mensalista.contrato) {
+      this.exibeStatus = 'ATIVO';
+    } else {
+      this.exibeStatus = 'INATIVO';
+    }
   }
 
   renovar(mensalista: Mensalistas) {
@@ -88,7 +94,7 @@ export class DialogFinalizarMensalComponent implements OnInit {
           this.valorDescontoAux = this.formatNumber(desconto);
           this.valorPagar = this.formatNumber(auxMoney - desconto);
         } else {
-          this.valorDescontoAux = 'Nao tem desconto';
+          this.valorDescontoAux = 'Sem desconto';
           this.valorPagar = this.formatNumber(auxMoney);
         }
       },

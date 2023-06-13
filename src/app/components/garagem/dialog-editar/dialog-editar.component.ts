@@ -80,7 +80,7 @@ export class DialogEditarComponent implements OnInit {
     let avulso = 0;
     let lavagem = 0;
     let diario = 0;
-    this.descontoAux = 'Nao tem direito';
+    this.descontoAux = 'Sem desconto';
     console.log(this.garagem.convenio);
     //PEGANDO O DOCUMENTO DO BD
     let valoresEst: Object;
@@ -181,7 +181,7 @@ export class DialogEditarComponent implements OnInit {
       this.garagemservice.updateAddMensal(obj).then(
         (sucess) => {
           this.garagemservice.updateCar(this.garagem);
-          this.toast.success('Adicionado com sucesso!');
+          this.toast.success('Finalizado com sucesso');
           this.dialogRef.close();
         },
         (err) => {

@@ -41,21 +41,38 @@ export class DialogEditMensalComponent implements OnInit {
       }
     }
   }
+  isValidDate(date: string): boolean {
+    let resultado = date.split('/');
+    let dia = Number(resultado[0]);
+    let mes = Number(resultado[1]);
+    let ano = Number(resultado[2]);
+
+    if (mes > 12 || mes <= 0 || dia > 31 || dia <= 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   dialogClose() {
     this.dialogRef.close();
   }
 
   update() {
-    this.mensalitasService.updateMensal(this.mensalistas).then(
-      (sucess) => {
-        this.dialogRef.close();
-        this.toast.success('Alterado com Sucesso!');
-      },
-      (errr) => {
-        this.toast.success('Erro na alteração');
-      }
-    );
+    if (this.isValidDate(this.mensalistas.dataNascimento)) {
+      this.mensalistas.dataNascimento = '';
+      this.toast.error('ERRO: Data invalida');
+    } else {
+      this.mensalitasService.updateMensal(this.mensalistas).then(
+        (sucess) => {
+          this.dialogRef.close();
+          this.toast.success('Alterado com Sucesso!');
+        },
+        (errr) => {
+          this.toast.success('Erro na alteração');
+        }
+      );
+    }
   }
 
   validaEmail(): boolean {

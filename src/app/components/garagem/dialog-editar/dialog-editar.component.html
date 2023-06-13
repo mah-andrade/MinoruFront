@@ -13,14 +13,12 @@
         <p>{{ garagem.modelo }}</p>
       </div>
       <div class="linhas">
-        <div class="linhas">
-          <h4 class="CAMPOS">Cliente com Desconto:&nbsp;</h4>
-          <p>{{ garagem.convenio }}</p>
-        </div>
-      </div>
-      <div class="linhas">
         <h4 class="CAMPOS">Hora Inicial:&nbsp;</h4>
         <p>{{ garagem.horaInicial }}</p>
+      </div>
+      <div class="linhas">
+        <h4 class="CAMPOS">Horario de saida:&nbsp;</h4>
+        <p>{{ dataFormat }}</p>
       </div>
     </div>
     <div class="campos">
@@ -37,13 +35,10 @@
         <p>{{ garagem.veiculo }}</p>
       </div>
       <div class="linhas">
-        <h4 class="CAMPOS">Horario de saida:&nbsp;</h4>
-        <p>{{ dataFormat }}</p>
-      </div>
-      <div class="linhas">
         <h4 class="CAMPOS">Valor do desconto:</h4>
         <p>{{ descontoAux }}</p>
       </div>
+      <div class="linhas"></div>
     </div>
   </div>
   <div class="valor">
